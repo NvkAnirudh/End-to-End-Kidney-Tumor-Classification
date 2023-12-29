@@ -9,7 +9,8 @@ import json
 import joblib
 import base64
 from pathlib import Path
-from box import ConfigBos
+from typing import Any
+from box import ConfigBox
 from objectClassifier import logger
 from ensure import ensure_annotations
 from box.exceptions import BoxValueError
