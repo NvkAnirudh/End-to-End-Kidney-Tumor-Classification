@@ -6,7 +6,7 @@ try:
     logger.info(f'{stage_name} started')
     pipeline = DataIngestionPipeline()
     pipeline.main()
-    logger.info('f{stage_name} completed \n\n')
+    logger.info(f'{stage_name} completed')
 except Exception as e:
     logger.exception(e)
     raise e

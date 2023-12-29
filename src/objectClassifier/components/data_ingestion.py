@@ -17,13 +17,13 @@ class DataIngestion:
             zip_download_dir = self.config.zip_data_file
 
             os.makedirs("artifacts/data_ingestion", exist_ok=True)
-            logger.info('Downloading data from {dataset_url} into {zip_download_dir}')
+            logger.info(f'Downloading data from {dataset_url} into {zip_download_dir}')
 
             file_id = dataset_url.split('/')[-2]
             prefix = 'https://drive.google.com/uc?/export=download&id='
             gdown.download(prefix+file_id, zip_download_dir)
 
-            logger.info('Downloaded data from {dataset_url} into {zip_download_dir}')
+            logger.info(f'Downloaded data from {dataset_url} into {zip_download_dir}')
 
         except Exception as e:
             raise e
