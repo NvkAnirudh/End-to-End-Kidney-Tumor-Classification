@@ -5,3 +5,9 @@ data_ingestion:
   source_URL: https://drive.google.com/file/d/1uoaHCK_3_87faQoD7bF2RChG9itkC6Wm/view?usp=sharing
   zip_data_file: artifacts/data_ingestion/data.zip
   unzip_dir: artifacts/data_ingestion
+
+base_model:
+  root_dir: artifacts/base_model
+  base_model_path: artifacts/base_model/base_model.h5
+  updated_base_model_path: artifacts/base_model/updated_base_model.h5
+
