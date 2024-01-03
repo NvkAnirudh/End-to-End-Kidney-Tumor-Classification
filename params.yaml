@@ -1,4 +1,4 @@
-augmentation: True
+augmentation: False
 image_size: [128,128,3] # as per Xception model requirement
 batch_size: 32
 include_top: False

@@ -1,7 +1,7 @@
 import os
 from objectClassifier.constants import *
 from objectClassifier.utils.helper import read_yaml, create_directories
-from objectClassifier.entity.config_entity import DataIngestionConfig, PrepareBaseModelConfig, TrainingConfig
+from objectClassifier.entity.config_entity import DataIngestionConfig, PrepareBaseModelConfig, TrainingConfig, EvaluationConfig
 
 class ConfigurationManager:
     def __init__(
@@ -70,4 +70,16 @@ class ConfigurationManager:
         )
 
         return training_config
+    
+    def get_evaluation_config(self) -> EvaluationConfig:
+        evaluation_config = EvaluationConfig(
+            path_of_model="artifacts/training/model.h5",
+            testing_data="artifacts/data_ingestion/test",
+            mlflow_uri="https://dagshub.com/NvkAnirudh/End-to-End-Kidney-Tumor-Classification.mlflow",
+            all_params=self.params,
+            params_image_size=self.params.image_size,
+            params_batch_size=self.params.batch_size
+        )
+
+        return evaluation_config
         

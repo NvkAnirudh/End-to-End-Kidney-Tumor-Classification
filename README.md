@@ -46,3 +46,27 @@ Now,
 ```bash
 open up you local host and port
 ```
+
+## MLflow
+
+- [Documentation](https://mlflow.org/docs/latest/index.html)
+
+- [MLflow tutorial](https://youtu.be/qdcHHrsXA48?si=bD5vDS60akNphkem)
+
+##### cmd
+- mlflow ui
+
+### dagshub
+[dagshub](https://dagshub.com/)
+
+Run this to export as env variables:
+
+```bash
+
+export MLFLOW_TRACKING_URI='your_mlflow_uri'
+
+export MLFLOW_TRACKING_USERNAME='your_username'
+
+export MLFLOW_TRACKING_PASSWORD='your_password'
+
+```
