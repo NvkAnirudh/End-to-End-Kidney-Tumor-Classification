@@ -1,7 +1,7 @@
 import os
 from objectClassifier.constants import *
 from objectClassifier.utils.helper import read_yaml, create_directories
-from objectClassifier.entity.config_entity import DataIngestionConfig, PrepareBaseModelConfig
+from objectClassifier.entity.config_entity import DataIngestionConfig, PrepareBaseModelConfig, TrainingConfig
 
 class ConfigurationManager:
     def __init__(
@@ -48,4 +48,26 @@ class ConfigurationManager:
         )
 
         return base_model_config
+    
+    def get_training_config(self) -> TrainingConfig:
+        config = self.config.training
+        base_model = self.config.base_model
+
+        training_data = os.path.join(self.config.data_ingestion.unzip_dir,'train')
+        validation_data = os.path.join(self.config.data_ingestion.unzip_dir,'valid')
+        create_directories([config.root_dir])
+
+        training_config = TrainingConfig(
+            root_dir=Path(config.root_dir),
+            trained_model_path=Path(config.trained_model_path),
+            updated_base_model_path=Path(base_model.updated_base_model_path),
+            training_data=Path(training_data),
+            validation_data=Path(validation_data),
+            params_epochs=self.params.epochs,
+            params_batch_size=self.params.batch_size,
+            params_is_augmentation=self.params.augmentation,
+            params_image_size=self.params.image_size
+        )
+
+        return training_config
         
