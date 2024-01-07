@@ -20,48 +20,24 @@ class ClientApp:
 def home():
     return render_template('index.html')
 
-# @app.route('/train',methods=['GET','POST'])
-# @cross_origin()
-# def train():
-#     os.system('python main.py')
-#     return "Training Completed"
-
-# @app.route('/predict',methods=['POST'])
-# @cross_origin()
-# def predictRoute():
-#     image = request.json['image']
-#     decodeImage(image, clientApp.filename)
-#     result = clientApp.classifier.predict()
-#     return jsonify(result)
-
-# if __name__=='__main__':
-#     clientApp = ClientApp()
-
-#     app.run(host='0.0.0.0',port=8080)
-
-@app.route("/train", methods=['GET','POST'])
+@app.route('/train',methods=['GET','POST'])
 @cross_origin()
-def trainRoute():
-    os.system("python main.py")
-    # os.system("dvc repro")
-    return "Training done successfully!"
+def train():
+    os.system('python main.py')
+    return "Training Completed"
 
-
-
-@app.route("/predict", methods=['POST'])
+@app.route('/predict',methods=['POST'])
 @cross_origin()
-def predictRoute():
+def predict():
     image = request.json['image']
-    decodeImage(image, clApp.filename)
-    result = clApp.classifier.predict()
-    print(result)
+    decodeImage(image, clientApp.filename)
+    result = clientApp.classifier.predict()
     return jsonify(result)
 
+if __name__=='__main__':
+    clientApp = ClientApp()
 
-if __name__ == "__main__":
-    clApp = ClientApp()
-
-    app.run(host='0.0.0.0', port=8080) #for AWS
+    app.run(host='0.0.0.0',port=8080)
 
 
 
