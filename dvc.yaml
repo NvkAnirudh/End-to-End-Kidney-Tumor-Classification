@@ -1,0 +1,54 @@
+stages:
+  data_ingestion:
+    cmd: python src/objectClassifier/pipeline/stage_01_data_ingestion.py
+    deps:
+      - src/objectClassifier/pipeline/stage_01_data_ingestion.py
+      - config/config.yaml
+    outs:
+      - artifacts/data_ingestion/train
+      - artifacts/data_ingestion/test
+      - artifacts/data_ingestion/valid
+  
+  prepare_base_model:
+    cmd: python src/objectClassifier/pipeline/stage_02_prepare_base_model.py
+    deps:
+      - src/objectClassifier/pipeline/stage_02_prepare_base_model.py
+      - config/config.yaml
+    params:
+      - image_size
+      - include_top
+      - classes
+      - weights
+      - learning_rate
+      - decay_steps
+      - decay_rate
+    outs:
+      - artifacts/base_model
+  
+  training:
+    cmd: python src/objectClassifier/pipeline/stage_03_model_training.py
+    deps:
+      - src/objectClassifier/pipeline/stage_03_model_training.py
+      - config/config.yaml
+      - artifacts/data_ingestion/train
+      - artifacts/base_model
+    params:
+      - image_size
+      - epochs
+      - batch_size
+    outs:
+      - artifacts/training/model.h5
+
+  evaluation:
+    cmd: python src/objectClassifier/pipeline/stage_04_model_evaluation_mlflow.py
+    deps:
+      - src/objectClassifier/pipeline/stage_04_model_evaluation_mlflow.py
+      - config/config.yaml
+      - artifacts/data_ingestion/test
+      - artifacts/training/model.h5
+    params:
+      - image_size
+      - batch_size
+    metrics:
+    - scores.json:
+        cache: false

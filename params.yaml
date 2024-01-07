@@ -6,7 +6,7 @@ epochs: 5
 classes: 2
 weights: imagenet
 learning_rate: 0.001
-momentum: 0.9 # for SGD optimizer
-nesterov: True # for SGD optimizer
+# momentum: 0.9 # for SGD optimizer
+# nesterov: True # for SGD optimizer
 decay_steps: 1000 # for Adam optimizer
 decay_rate: 0.9 # for Adam optimizer

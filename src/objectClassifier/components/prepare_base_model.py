@@ -44,8 +44,9 @@ class PrepareBaseModel:
 
         lr_schedule = ExponentialDecay(
             initial_learning_rate=learning_rate,
-            decay_steps=self.config.params_decay_steps,
-            decay_rate=self.config.params_decay_rate)
+            decay_steps=1000,
+            # decay_rate=self.config.params_decay_rate)
+            decay_rate=0.9)
         optimizer = Adam(learning_rate=lr_schedule)
         model.compile(loss='binary_crossentropy',optimizer=optimizer,metrics=['accuracy'])
 
